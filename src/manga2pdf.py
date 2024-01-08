@@ -60,7 +60,7 @@ def main(workdir):
                 pdf_folder,
                 pbar
             )
-
+    f.shutdown()
     #合并为一个pdf
     integrate_pdf = os.path.join(pdf_folder, manga_name + '.pdf')
     pdf_files = [pdf for pdf in os.listdir(pdf_folder) if not pdf == manga_name + '.pdf']
@@ -69,6 +69,5 @@ def main(workdir):
     pdf_files = [os.path.join(pdf_folder, pdf) for pdf in pdf_files]
     merge_pdfs(pdf_files, integrate_pdf)
     pbar.update()
-    print()
 
-# main(r'D:\wz5222\python\Python\copymanga_downloader\Download\減法累述')
+main(r'D:\wz5222\python\Python\copymanga_downloader\Download\天狼雙星SiriusTwinStars')
