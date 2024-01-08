@@ -2,7 +2,7 @@ import os
 from spider_toolbox import file_tools
 from concurrent.futures import ThreadPoolExecutor
 from tqdm import tqdm
-from src import drew_comment_pic, check_comic_download, remove_end_ad, config_info, pic_downloader, ai_image_processor
+from src import drew_comment_pic, check_comic_download, remove_end_ad, config_info, pic_downloader, ai_image_processor, manga2pdf
 
 download_path = config_info.download_path
 
@@ -27,7 +27,7 @@ class Comic_downloader:
             for i, pic_url in enumerate(pic_urls, start=1):
                 f.submit(pic_downloader.download, pic_url, workdir, str(i), False)
             # 当前话的评论
-            drew_comment_pic.main(comments, workdir, str(i + 1))
+            # drew_comment_pic.main(comments, workdir, str(i + 1))
         pbar.update()
 
     def thread_downloader(self):
@@ -48,6 +48,8 @@ class Comic_downloader:
         remove_end_ad.main(self.workdir)
         # ai优化
         ai_image_processor.main(self.workdir)
+        # 同时输出pdf格式
+        manga2pdf.main(self.workdir)
 
 
 if __name__ == '__main__':
